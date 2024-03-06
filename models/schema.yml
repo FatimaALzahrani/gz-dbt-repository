@@ -47,11 +47,103 @@ sources:
           - name: ship_cost
             description: the shipping cost paid by Greenweez to the carrier/transporter.
 
+      - name: raw_gz_adwords
+        description: raw_gz_adwords table
+        tests:
+              - unique:
+                  column_name: "(campaign_key || '-' || date_date)"
+              - not_null
+        columns:
+          - name: date_date
+            description: the date of purchase
+          - name: paid_source
+            description: The source from which the ad was paid for
+          - name: campaign_key
+            description: The unique identifier for the ad campaign. 
+          - name: camPGN_name
+            description: The name or title of the ad campaign
+          - name: ads_cost
+            description: The cost incurred for running the ad campaign
+          - name: impression
+            description: The number of times the ad was displayed to users.
+          - name: click
+            description: The number of times users clicked on the ad
+
+      - name: raw_gz_bing
+        description: raw_gz_bing table
+        tests:
+              - unique:
+                  column_name: "(campaign_key || '-' || date_date)"
+              - not_null
+        columns:
+          - name: date_date
+            description: the date of purchase
+          - name: paid_source
+            description: The source from which the ad was paid for
+          - name: campaign_key
+            description: The unique identifier for the ad campaign. 
+          - name: camPGN_name
+            description: The name or title of the ad campaign
+          - name: ads_cost
+            description: The cost incurred for running the ad campaign
+          - name: impression
+            description: The number of times the ad was displayed to users.
+          - name: click
+            description: The number of times users clicked on the ad
+
+      - name: raw_gz_criteo
+        description: raw_gz_criteo table
+        tests:
+              - unique:
+                  column_name: "(campaign_key || '-' || date_date)"
+              - not_null
+        columns:
+          - name: date_date
+            description: the date of purchase
+          - name: paid_source
+            description: The source from which the ad was paid for
+          - name: campaign_key
+            description: The unique identifier for the ad campaign. 
+          - name: camPGN_name
+            description: The name or title of the ad campaign
+          - name: ads_cost
+            description: The cost incurred for running the ad campaign
+          - name: impression
+            description: The number of times the ad was displayed to users.
+          - name: click
+            description: The number of times users clicked on the ad
+
+      - name: raw_gz_facebook
+        description: raw_gz_facebook table
+        tests:
+              - unique:
+                  column_name: "(campaign_key || '-' || date_date)"
+              - not_null
+        columns:
+          - name: date_date
+            description: the date of purchase
+          - name: paid_source
+            description: The source from which the ad was paid for
+          - name: campaign_key
+            description: The unique identifier for the ad campaign. 
+          - name: camPGN_name
+            description: The name or title of the ad campaign
+          - name: ads_cost
+            description: The cost incurred for running the ad campaign
+          - name: impression
+            description: The number of times the ad was displayed to users.
+          - name: click
+            description: The number of times users clicked on the ad
+
 
 models:
   - name: stg_raw__product
   - name: stg_raw__sales
   - name: stg_raw__ship
+  - name: stg_raw__raw_gz_facebook
+  - name: stg_raw__raw_gz_criteo
+  - name: stg_raw__raw_gz_adwords
+  - name: stg_raw__raw_gz_bing
   - name: int_sales_margin
     description: margin calcultation per order line / product sale
     columns:
@@ -81,6 +173,14 @@ models:
         description: Operational margin = margin + shipping fee - log_cost - ship_cost
   - name: finance_days
     description: finance calculation per days
+  - name : int_campaigns
+    description: union of bing & facebook & adwords & criteo
+  - name : int_campaigns_day
+    description:  aggregated version of int_campaigns model 
+  - name : finance_campaigns_day
+    description: compagin finance_days and int_campaigns_day
+  - name: finance_campaigns_month
+    description: aggregated version of finance_campaigns_day for each month
 
 
 # models:
